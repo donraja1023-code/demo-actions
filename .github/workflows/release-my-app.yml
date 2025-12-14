@@ -1,0 +1,21 @@
+name: Build my-app and Release in Github Releases
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Build executable
+      run: gcc main.c -o my-app
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: my-app
